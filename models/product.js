@@ -12,8 +12,6 @@ const productSchema = new Schema({
   userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
 });
 
-// ^ pagination is currently unnecessary, app won't be handling thousands of products at once (because there aren't so many)
-// ! pagination will be implemented during course section S21 - Adding Pagination
 productSchema.statics.fetchAll = async function (
   page,
   PRODUCTS_PER_PAGE,
