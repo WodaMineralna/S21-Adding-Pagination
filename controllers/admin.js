@@ -1,13 +1,21 @@
 import Product from "../models/product.js";
 
 const PLACEHOLDER_DETAILS = { cause: null, message: "Something went wrong..." };
+const PRODUCTS_PER_PAGE = 4;
 
 export const getProductsPage = async (req, res, next) => {
-  const products = await Product.fetchAll(req.user._id);
+  const page = req.query.page;
+
+  const { products, paginationData } = await Product.fetchAll(
+    page,
+    PRODUCTS_PER_PAGE,
+    req.user._id
+  );
   return res.render("admin/products", {
     products,
     pageTitle: "Admin Products",
     path: "/admin/products",
+    paginationData,
   });
 };
 

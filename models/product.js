@@ -14,10 +14,37 @@ const productSchema = new Schema({
 
 // ^ pagination is currently unnecessary, app won't be handling thousands of products at once (because there aren't so many)
 // ! pagination will be implemented during course section S21 - Adding Pagination
-productSchema.statics.fetchAll = async function (filter) {
-  // log("info", "Products fetched");
+productSchema.statics.fetchAll = async function (
+  page,
+  PRODUCTS_PER_PAGE,
+  filter
+) {
+  if (isNaN(page) || page === undefined) page = 1;
+  page = +page;
+
   try {
-    return await this.find(filter ? { userId: filter } : {});
+    const totalProductsCount = await this.estimatedDocumentCount();
+    log(
+      "info",
+      `Currently on page ${page}, fetching max ${PRODUCTS_PER_PAGE} products, total products count: ${totalProductsCount}`
+    );
+
+    const products = await this.find(filter ? { userId: filter } : {})
+      .skip((page - 1) * PRODUCTS_PER_PAGE)
+      .limit(PRODUCTS_PER_PAGE);
+    // log("info", `Products fetched: ${products}`); // DEBUGGING
+
+    return {
+      products,
+      paginationData: {
+        currentPage: page,
+        hasNextPage: PRODUCTS_PER_PAGE * page < totalProductsCount,
+        hasPreviousPage: page > 1,
+        nextPage: page + 1,
+        previousPage: page - 1,
+        lastPage: Math.ceil(totalProductsCount / PRODUCTS_PER_PAGE),
+      },
+    };
   } catch (error) {
     log("error", error);
     throw newError("Failed to fetch products", error);

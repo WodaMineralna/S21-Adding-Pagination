@@ -4,22 +4,35 @@ import { fillInvoicePDF } from "../utils/index.js";
 import Product from "../models/product.js";
 
 const PLACEHOLDER_DETAILS = { cause: null, message: "Something went wrong..." };
+const PRODUCTS_PER_PAGE = 1;
 
 export async function getIndex(req, res, next) {
-  const products = await Product.fetchAll();
+  const page = req.query.page;
+
+  const { products, paginationData } = await Product.fetchAll(
+    page,
+    PRODUCTS_PER_PAGE
+  );
   return res.render("shop/index", {
     products,
     pageTitle: "Shop",
     path: "/",
+    paginationData,
   });
 }
 
 export async function getProductsPage(req, res, next) {
-  const products = await Product.fetchAll();
+  const page = req.query.page;
+
+  const { products, paginationData } = await Product.fetchAll(
+    page,
+    PRODUCTS_PER_PAGE
+  );
   return res.render("shop/product-list", {
     products,
     pageTitle: "All Products",
     path: "/products",
+    paginationData,
   });
 }
 
