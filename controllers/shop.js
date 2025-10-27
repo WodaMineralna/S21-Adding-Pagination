@@ -4,7 +4,7 @@ import { fillInvoicePDF } from "../utils/index.js";
 import Product from "../models/product.js";
 
 const PLACEHOLDER_DETAILS = { cause: null, message: "Something went wrong..." };
-const PRODUCTS_PER_PAGE = process.env.PRODUCTS_PER_PAGE || 4;
+const PRODUCTS_PER_PAGE = process.env.PRODUCTS_PER_PAGE || 3;
 
 export async function getIndex(req, res, next) {
   const page = req.query.page;
