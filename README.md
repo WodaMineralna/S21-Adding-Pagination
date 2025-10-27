@@ -111,40 +111,45 @@ npm run db:test
 
 ===== DB connection OK =====
 
---- Product data: --- [
-  {
-    _id: new ObjectId('68c5a0d9f45e62ed9233c5d3'),
-    title: 'Physical picture of a kitty',
-    price: 0.99,
-    description: 'kitty',
-    imageUrl: 'images/kitty-image.jpg',
-    userId: new ObjectId('68c59cebf2b7f6e17ff9ea08')
-  },
-  {
-    _id: new ObjectId('68c32686af5c529e81421f78'),
-    title: 'A book!',
-    price: 12.99,
-    description: 'Funny-colored',
-    imageUrl: 'images/book-image.jpg',
-    userId: new ObjectId('68c59cebf2b7f6e17ff9ea08')
-  },
-  {
-    _id: new ObjectId('68c32686af5c529e814266e1'),
-    title: 'Red apple',
-    price: 2.99,
-    description: 'Do not combine with a pen',
-    imageUrl: 'images/apple-image.png',
-    userId: new ObjectId('68c59cebf2b7f6e17ff9ea08')
-  },
-  {
-    _id: new ObjectId('68c495a27829b9cab975da81'),
-    title: 'Pen',
-    price: 249.99,
-    description: 'Pure prestige',
-    imageUrl: 'images/pen-image.png',
-    userId: new ObjectId('68c49525baa988da36319592')
+--- Product data: --- {
+  products: [
+    {
+      _id: new ObjectId('68c5a0d9f45e62ed9233c5d3'),
+      title: 'Physical Picture of a Kitty',
+      price: 0.99,
+      description: "10cm x 15cm picture of a kitty named 'Puszek'",
+      imageUrl: 'images/kitty-image.jpg',
+      userId: new ObjectId('68c59cebf2b7f6e17ff9ea08')
+    },
+    {
+      _id: new ObjectId('68c32686af5c529e81421f78'),
+      title: 'Chess Book',
+      price: 12.99,
+      description: "'My 60 Memorable Games', by Bobby Fischer",
+      imageUrl: 'images/book-image.jpg',
+      userId: new ObjectId('68c59cebf2b7f6e17ff9ea08')
+    },
+
+    // ...7 more sample products
+
+    {
+      _id: new ObjectId('68ffee030d8e212fc0fa3359'),
+      title: 'Smartphone',
+      price: 499.99,
+      description: 'Latest model smartphone with high-res camera',
+      imageUrl: 'images/smartphone-image.png',
+      userId: new ObjectId('68c59cebf2b7f6e17ff9ea08')
+    }
+  ],
+  paginationData: {
+    currentPage: 1,
+    hasNextPage: false,
+    hasPreviousPage: false,
+    nextPage: 2,
+    previousPage: 0,
+    lastPage: NaN
   }
-]
+}
 
 --- User data: --- [
   {
